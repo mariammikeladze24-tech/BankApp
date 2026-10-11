@@ -22,12 +22,9 @@ class EasyBankSteps {
         page.loginPasswordField.tap()
         page.loginPasswordField.typeText(pass)
         
-        page.loginPasswordField.typeText("\n")
         if page.app.keyboards.element.exists { 
-            page.app.swipeUp()
+            page.app.keyboards.buttons["Return"].tap() 
         }
-        
-        XCTAssertTrue(page.loginSubmitButton.waitForExistence(timeout: timeout))
         page.loginSubmitButton.tap()
     }
     
@@ -41,19 +38,16 @@ class EasyBankSteps {
         let closePrompt = page.app.buttons["Close"]
         if closePrompt.waitForExistence(timeout: 2.0) { 
             closePrompt.tap() 
+            page.regPasswordField.tap() // Re-focus the field just in case
         }
         
-      
-        page.regPasswordField.tap()
         page.regPasswordField.typeText(pass)
         
         page.regRepeatPasswordField.tap()
         page.regRepeatPasswordField.typeText(pass)
         
-
-        page.regRepeatPasswordField.typeText("\n")
-        if page.app.keyboards.element.exists {
-            page.app.swipeUp()
+        if page.app.keyboards.element.exists { 
+            page.app.keyboards.buttons["Return"].tap()
         }
         
         XCTAssertTrue(page.regSubmitButton.waitForExistence(timeout: timeout))
