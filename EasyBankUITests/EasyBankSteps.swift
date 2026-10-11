@@ -42,9 +42,11 @@ class EasyBankSteps {
         page.regRepeatPasswordField.tap()
         page.regRepeatPasswordField.typeText(pass)
         
+        // RELIABLE FIX: Tap return to drop the keyboard, then swipe UP to scroll to the bottom
         if page.app.keyboards.element.exists { 
-            page.app.swipeDown() 
+            page.app.keyboards.buttons["Return"].tap() 
         }
+        page.app.swipeUp()
         
         XCTAssertTrue(page.regSubmitButton.waitForExistence(timeout: timeout))
         page.regSubmitButton.tap()
